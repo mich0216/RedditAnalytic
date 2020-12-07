@@ -8,7 +8,7 @@ package logic;
 import common.ValidationException;
 import dal.RedditAccountDAL;
 import entity.RedditAccount;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +105,7 @@ public class RedditAccountLogic extends GenericLogic<RedditAccount, RedditAccoun
 
         //set values on entity
         entity.setName(name);
-        entity.setCreated(Date.valueOf(created));
+        entity.setCreated(convertStringToDate(created));
         entity.setLinkPoints(Integer.parseInt(link_points));
         entity.setCommentPoints(Integer.parseInt(comment_points));
         return entity;
