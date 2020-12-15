@@ -16,7 +16,7 @@ import logic.LogicFactory;
 
 /**
  *
- * @author Elakad Ahmed 
+ * @author ahmed 
  */
 @WebServlet( name = "CommentTable", urlPatterns = { "/CommentTable" } )
 public class CommentTableView extends HttpServlet {

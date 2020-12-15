@@ -6,11 +6,7 @@ import entity.RedditAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +21,7 @@ import logic.RedditAccountLogic;
 
 /**
  *
- * @author Shariar (Shawn) Emami
+ * @author ahmed
  */
 @WebServlet( name = "CreateComment", urlPatterns = { "/CreateComment" } )
 public class CreateComment extends HttpServlet {

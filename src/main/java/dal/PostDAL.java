@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  *
- * @author chris
+ * @author sabiha
  */
 public class PostDAL extends GenericDAL<Post> {
 

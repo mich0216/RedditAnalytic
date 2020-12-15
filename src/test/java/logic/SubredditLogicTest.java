@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author chris
+ * @author vetty
  */
 public class SubredditLogicTest {
     private SubredditLogic logic;

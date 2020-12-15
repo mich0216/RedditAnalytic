@@ -17,7 +17,7 @@ import java.util.function.ObjIntConsumer;
 
 /**
  *
- * @author sabih
+ * @author sabiha
  */
 public class PostLogic extends GenericLogic<Post, PostDAL> {
 

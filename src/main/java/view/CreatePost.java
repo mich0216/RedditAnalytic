@@ -24,7 +24,7 @@ import logic.SubredditLogic;
 
 /**
  *
- * @author sabih
+ * @author  sabiha
  */
 @WebServlet(name = "CreatePost", urlPatterns = {"/CreatePost"})
 public class CreatePost extends HttpServlet {

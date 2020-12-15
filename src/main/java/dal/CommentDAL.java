@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  *
- * @author ahmed_8ll428a
+ * @author ahmed
  */
 public class CommentDAL extends GenericDAL<Comment> {
     

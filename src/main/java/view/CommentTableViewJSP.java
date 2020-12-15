@@ -23,7 +23,7 @@ import logic.LogicFactory;
 
 /**
  *
- * @author chris
+ * @author ahmed
  */
 @WebServlet( name = "CommentTableJSP", urlPatterns = { "/CommentTableJSP" } )
 public class CommentTableViewJSP  extends HttpServlet {

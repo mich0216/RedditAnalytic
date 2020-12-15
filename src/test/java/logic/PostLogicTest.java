@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author sabih
+ * @author sabiha
  */
 
 class PostLogicTest {

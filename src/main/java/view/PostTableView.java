@@ -21,7 +21,7 @@ import logic.LogicFactory;
 
 /**
  *
- * @author sabih
+ * @author  sabiha
  */
 @WebServlet(name = "PostTable", urlPatterns = {"/PostTable"})
 

@@ -13,7 +13,7 @@
     <name>RedditAnalytic-Skeleton</name>
 
     <properties>
-        <filename>lastname-firstname-labsection#</filename>
+        <filename>Michael-Chrishanthi-021</filename>
 
         <junit.version>5.6.2</junit.version>
         <apache.tomcat.version>9.0.39</apache.tomcat.version>

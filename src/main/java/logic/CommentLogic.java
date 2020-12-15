@@ -1,6 +1,5 @@
 package logic;
 
-import common.ValidationException;
 import dal.CommentDAL;
 import entity.Comment;
 import java.util.Arrays;
@@ -8,11 +7,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.ObjIntConsumer;
 
 /**
  *
- * @author Shariar (Shawn) Emami
+ * @author ahmed
  */
 public class CommentLogic extends GenericLogic<Comment, CommentDAL> {
 

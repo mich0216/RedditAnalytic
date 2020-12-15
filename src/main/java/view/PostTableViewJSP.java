@@ -23,7 +23,7 @@ import logic.PostLogic;
 
 /**
  *
- * @author chris
+ * @author sabiha
  */
 @WebServlet( name = "PostTableJSP", urlPatterns = { "/PostTableJSP" } )
 public class PostTableViewJSP   extends HttpServlet{
