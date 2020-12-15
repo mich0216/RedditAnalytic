@@ -25,8 +25,8 @@ public class SubredditLogic extends GenericLogic<Subreddit, SubredditDAL> {
     public static final String URL = "url";
     public static String ID = "id";
     
-    SubredditLogic(SubredditDAL dal) {
-        super(dal);
+    SubredditLogic() {
+        super(new SubredditDAL());
     }
 
     @Override
@@ -89,9 +89,8 @@ public class SubredditLogic extends GenericLogic<Subreddit, SubredditDAL> {
         String subscribers = parameterMap.get( SUBSCRIBERS )[ 0 ];
 
         //validate the data
-        validator.accept( name, 45 );
-        validator.accept( url, 45 );
-        validator.accept( subscribers, 45 );
+        validator.accept( name, 100 );
+        validator.accept( url, 255 );
 
         //set values on entity
         entity.setName(name);

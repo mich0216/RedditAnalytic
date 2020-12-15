@@ -41,42 +41,28 @@ public class PostTableView extends HttpServlet {
 
             out.println("<table style=\"margin-left: auto; margin-right: auto;\" border=\"1\">");
             out.println("<caption>Post</caption>");
-
-            out.println("<tr>");
-            out.println("<th>id</th>");
-            out.println("<th>points</th>");
-            out.println("<th>unique_id</th>");
-            out.println("<th>comment_count</th>");
-            out.println("<th>title</th>");
-            out.println("<th>created</th>");
-            out.println("<th>reddit_account_id</th>");
-            out.println("<th>subreddit_id </th>");
-
-            out.println("</tr>");
-            PostLogic logic = LogicFactory.getFor("Post");
-            List<Post> entities = logic.getAll();
-            for (Post e : entities) {
-//for other tables replace the code bellow with
-//extractDataAsList in a loop to fill the data.
-                out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
-                        logic.extractDataAsList(e).toArray());
+            PostLogic postLogic = LogicFactory.getFor("Post");
+            out.println( "<tr>" );
+            for(String col : postLogic.getColumnNames()){ 
+                out.println("<th>"+col+"</th>" );
+            }
+            out.println( "<tr>" );
+            List<Post> entities = postLogic.getAll();
+            for( Post e: entities ) {
+                //for other tables replace the code bellow with
+                //extractDataAsList in a loop to fill the data.
+                out.printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+                        postLogic.extractDataAsList( e ).toArray() );
             }
 
-            out.println("<tr>");
-//this is an example, for your other tables use getColumnNames from
-//logic to create headers in a loop.
-
-            out.println("<th>id</th>");
-            out.println("<th>points</th>");
-            out.println("<th>unique_id</th>");
-
-            out.println("<th>comment_count</th>");
-            out.println("<th>title</th>");
-            out.println("<th>created</th>");
-            out.println("<th>reddit_account_id</th>");
-            out.println("<th>subreddit_id </th>");
-
-            out.println("</tr>");
+            out.println( "<tr>" );
+            //this is an example, for your other tables use getColumnNames from
+            //logic to create headers in a loop.
+            out.println( "<tr>" );
+            for(String col : postLogic.getColumnNames()){ 
+                out.println("<th>"+col+"</th>" );
+            }
+            out.println( "<tr>" );
             out.println("</table>");
             out.printf("<div style=\"text-align: center;\"><pre>%s</pre></div>", toStringMap(
                     request.getParameterMap()));

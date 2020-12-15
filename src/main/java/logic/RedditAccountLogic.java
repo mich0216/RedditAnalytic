@@ -40,7 +40,7 @@ public class RedditAccountLogic extends GenericLogic<RedditAccount, RedditAccoun
 
     @Override
     public List<String> getColumnCodes() {
-        return Arrays.asList( ID, NAME,CREATED, LINK_POINTS,COMMENT_POINTS );
+        return Arrays.asList( ID, NAME, CREATED, LINK_POINTS, COMMENT_POINTS );
     }
 
     @Override
@@ -58,7 +58,6 @@ public class RedditAccountLogic extends GenericLogic<RedditAccount, RedditAccoun
 
         //create a new Entity object
         RedditAccount entity = new RedditAccount();
-
         //ID is generated, so if it exists add it to the entity object
         //otherwise it does not matter as mysql will create an if for it.
         //the only time that we will have id is for update behaviour.
@@ -91,21 +90,16 @@ public class RedditAccountLogic extends GenericLogic<RedditAccount, RedditAccoun
         //converted to appropriate type. have in mind that values are
         //stored in an array of String; almost always the value is at
         //index zero unless you have used duplicated key/name somewhere.
-        //ID, NAME,CREATED, LINK_POINTS,COMMENT_POINTS
         String name = parameterMap.get( NAME )[ 0 ];
-        String created = parameterMap.get( CREATED )[ 0 ];
         String link_points = parameterMap.get( LINK_POINTS )[ 0 ];
         String comment_points = parameterMap.get( COMMENT_POINTS )[ 0 ];
-
+//        String created = parameterMap.get( CREATED )[ 0 ];
         //validate the data
         validator.accept( name, 45 );
-        validator.accept( created, 45 );
-        validator.accept( link_points, 45 );
-        validator.accept( comment_points, 45 );
-
+ 
         //set values on entity
         entity.setName(name);
-        entity.setCreated(convertStringToDate(created));
+        entity.setCreated(new Date());
         entity.setLinkPoints(Integer.parseInt(link_points));
         entity.setCommentPoints(Integer.parseInt(comment_points));
         return entity;

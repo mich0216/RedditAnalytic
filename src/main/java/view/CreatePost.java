@@ -6,13 +6,12 @@
 package view;
 
 import entity.Post;
+import entity.RedditAccount;
+import entity.Subreddit;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.PostLogic;
 import logic.LogicFactory;
+import logic.RedditAccountLogic;
+import logic.SubredditLogic;
 
 /**
  *
@@ -80,9 +81,6 @@ public class CreatePost extends HttpServlet {
             out.println("<br>");
             out.println("subreddit_id:<br>");
             out.printf("<input type=\"text\" name=\"%s\" value=\"\"><br>", PostLogic.SUBREDDIT_ID);
-            out.println("<br>");
-            out.println("id:<br>");
-            out.printf("<input type=\"text\" name=\"%s\" value=\"\"><br>", PostLogic.ID);
             out.println("<br>");
 
             out.println("<input type=\"submit\" name=\"view\" value=\"Add and View\">");
@@ -155,19 +153,21 @@ public class CreatePost extends HttpServlet {
             throws ServletException, IOException {
         log("POST");
         log("POST: Connection=" + connectionCount);
-        if (connectionCount < 3) {
-            connectionCount++;
-            try {
-                TimeUnit.SECONDS.sleep(60);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(CreatePost.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+
         PostLogic pLogic = LogicFactory.getFor("Post");
         String unique_id = request.getParameter(PostLogic.UNIQUE_ID);
         if (pLogic.getPostWithUniqueId(unique_id) == null) {
             try {
                 Post post = pLogic.createEntity(request.getParameterMap());
+                //create the two logics for reddit account and subreddit
+                RedditAccountLogic rLogic = LogicFactory.getFor("RedditAccount");
+                SubredditLogic sLogic = LogicFactory.getFor("Subreddit");
+                //get the entities from logic using getWithId
+                RedditAccount redditAccount = rLogic.getWithId(Integer.parseInt(PostLogic.REDDIT_ACCOUNT_ID));
+                Subreddit subreddit = sLogic.getWithId(Integer.parseInt(PostLogic.SUBREDDIT_ID));
+                //set the entities on your post object before adding them to db
+                post.setRedditAccountId(redditAccount);
+                post.setSubredditId(subreddit);      
                 pLogic.add(post);
             } catch (Exception ex) {
                 errorMessage = ex.getMessage();

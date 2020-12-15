@@ -100,17 +100,9 @@ public class PostLogic extends GenericLogic<Post, PostDAL> {
         String points = parameterMap.get(POINTS)[0];
         String comment_count = parameterMap.get(COMMENT_COUNT)[0];
         String unique_id = parameterMap.get(UNIQUE_ID)[0];
-        String reddit = parameterMap.get(REDDIT_ACCOUNT_ID)[ 0 ];
-        String subreddit_id = parameterMap.get( SUBREDDIT_ID)[ 0 ];
 
-        validator.accept(title, 45);
-        validator.accept(id, 45);
-        validator.accept(created, 45);
-        validator.accept(points, 45);
-        validator.accept(comment_count, 45);
-        validator.accept(unique_id, 45);
-        validator.accept( reddit, 45 );
-        validator.accept( subreddit_id, 45 );
+        validator.accept(title, 255);
+        validator.accept(unique_id, 10);
 
 //set values on entity
         entity.setTitle(title);
@@ -119,8 +111,6 @@ public class PostLogic extends GenericLogic<Post, PostDAL> {
         entity.setPoints(Integer.parseInt(parameterMap.get(POINTS)[0]));
         entity.setCommentCount(Integer.parseInt(parameterMap.get(COMMENT_COUNT)[0]));
         entity.setUniqueId(unique_id);
-  //      entity.setRedditAccountId(reddit);
-   //     entity.setSubredditId(subreddit_id );
 
         return entity;
 
@@ -128,7 +118,7 @@ public class PostLogic extends GenericLogic<Post, PostDAL> {
 
     @Override
     public List<String> getColumnNames() {
-        return Arrays.asList("created", "title", "id", "comment_count", "points", "unique_id", "reddit",
+        return Arrays.asList("id", "created", "title", "points","comment_count", "unique_id", "reddit",
                 "subreddit_id");
     }
 
@@ -140,8 +130,8 @@ public class PostLogic extends GenericLogic<Post, PostDAL> {
 
     @Override
     public List<?> extractDataAsList(Post e) {
-        return Arrays.asList(e.getId(), e.getCreated(), e.getTitle(), e.getPoints(), e.getCommentCount(),
-                e.getRedditAccountId(), e.getUniqueID(), e.getSubredditId());
+        return Arrays.asList(e.getId(), e.getCreated(), e.getTitle(), e.getPoints(), e.getCommentCount(),e.getUniqueID(),
+                e.getRedditAccountId().getId(), e.getSubredditId().getId());
     }
 
 }

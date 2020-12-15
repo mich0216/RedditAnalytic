@@ -16,8 +16,8 @@ import java.util.Map;
  */
 public class SubredditDAL extends GenericDAL <Subreddit>  {
 
-    public SubredditDAL(Class<Subreddit> entityClass) {
-        super(entityClass);
+    public SubredditDAL() {
+        super( Subreddit.class );
     }
 
     @Override

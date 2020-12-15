@@ -2,11 +2,7 @@ package logic;
 
 import common.ValidationException;
 import dal.CommentDAL;
-import dal.PostDAL;
-import dal.RedditAccountDAL;
 import entity.Comment;
-import entity.Post;
-import entity.RedditAccount;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -110,7 +106,17 @@ public class CommentLogic extends GenericLogic<Comment, CommentDAL> {
         
         int points = Integer.parseInt(parameterMap.get( POINTS)[ 0 ]);
         int replys = Integer.parseInt(parameterMap.get( REPLYS )[ 0 ]);
-        int isreplyInt = Integer.parseInt(parameterMap.get( IS_REPLY )[ 0 ]);
+        
+        int isreplyInt;
+        if(parameterMap.get( IS_REPLY )== null)
+        {
+          isreplyInt = 0;  
+        }
+        else
+        {
+             isreplyInt = Integer.parseInt(parameterMap.get( IS_REPLY )[ 0 ]);
+        }
+       
         boolean is_reply = (isreplyInt==1)?true:false;
         
         int postId = Integer.parseInt(parameterMap.get( POST_ID)[ 0 ]);
@@ -122,27 +128,39 @@ public class CommentLogic extends GenericLogic<Comment, CommentDAL> {
         entity.setText(txt);
         entity.setPoints(points);
         entity.setReplys(replys);
-        
-        
-       // PostLogic postLogic = LogicFactory.getFor("Post");
-      //  RedditAccountLogic redditLogic = LogicFactory.getFor("RedditAccount");
-        
-        PostDAL postDal = new PostDAL();
-        RedditAccountDAL reditDal = new RedditAccountDAL();
-         
-       // Post post = postLogic.getWithId(postId);
-       // RedditAccount redditAccount = redditLogic.getWithId(reditId);
-        
-         Post post = postDal.findById(postId);
-        RedditAccount redditAccount = reditDal.findById(postId);
-        
-        
-        
-        entity.setPostId(post);
-        entity.setRedditAccountId(redditAccount);
-      
 
         return entity;
     
     }
+    
+    public Comment getCommentWithUniqueId( String uniqueId ) 
+    {
+        return get( () -> dal().findByUniqueId(uniqueId));
+    }
+    
+    public List<Comment> getCommentsWithText( String text ) 
+    {
+        return get( () -> dal().findByText(text));
+    }
+    
+    public List<Comment> getCommentsWithCreated( Date created ) 
+    {
+        return get( () -> dal().findByCreated(created));
+    }
+    
+    public List<Comment> getCommentsWithPoints(int points) 
+    {
+        return get( () -> dal().findByPoints(points));
+    }
+    
+    public List<Comment> getCommentsWithReplys(int replys) 
+    {
+        return get( () -> dal().findByReplys(replys));
+    }
+    
+    public List<Comment> getCommentsWithIsReply(boolean isReply) 
+    {
+        return get( () -> dal().findByIsReply(isReply));
+    }
+      
 }

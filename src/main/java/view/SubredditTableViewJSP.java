@@ -1,6 +1,7 @@
 package view;
 
-import entity.Account;
+
+import entity.Subreddit;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,15 +14,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logic.AccountLogic;
 import logic.LogicFactory;
+import logic.SubredditLogic;
 
 /**
  *
- * @author Shariar (Shawn) Emami
+ * @author vetty
  */
-@WebServlet( name = "AccountTableJSP", urlPatterns = { "/AccountTableJSP" } )
-public class AccountTableViewJSP extends HttpServlet {
+@WebServlet( name = "SubredditTableJSP", urlPatterns = { "/SubredditTableJSP" } )
+public class SubredditTableViewJSP extends HttpServlet {
 
     private void fillTableData( HttpServletRequest req, HttpServletResponse resp )
             throws ServletException, IOException {
@@ -35,10 +36,10 @@ public class AccountTableViewJSP extends HttpServlet {
 
     private List<?> extractTableData( HttpServletRequest req ) {
         String search = req.getParameter( "searchText" );
-        AccountLogic logic = LogicFactory.getFor( "Account" );
+        SubredditLogic logic = LogicFactory.getFor( "Subreddit" );
         req.setAttribute( "columnName", logic.getColumnNames() );
         req.setAttribute( "columnCode", logic.getColumnCodes() );
-        List<Account> list;
+        List<Subreddit> list;
         if( search != null ){
             list = logic.search( search );
         } else {
@@ -79,8 +80,8 @@ public class AccountTableViewJSP extends HttpServlet {
     protected void doPost( HttpServletRequest req, HttpServletResponse resp )
             throws ServletException, IOException {
         log( "POST" );
-        AccountLogic logic = LogicFactory.getFor( "Account" );
-        Account account = logic.updateEntity( req.getParameterMap() );
+        SubredditLogic logic = LogicFactory.getFor( "Subreddit" );
+        Subreddit account = logic.updateEntity( req.getParameterMap() );
         logic.update( account );
         fillTableData( req, resp );
     }
@@ -127,9 +128,6 @@ public class AccountTableViewJSP extends HttpServlet {
     protected void doDelete( HttpServletRequest req, HttpServletResponse resp )
             throws ServletException, IOException {
         log( "DELETE" );
-        AccountLogic logic = LogicFactory.getFor( "Account" );
-        Account account = logic.updateEntity( req.getParameterMap() );
-        logic.delete(account );
         doPost( req, resp );
     }
 
@@ -157,3 +155,4 @@ public class AccountTableViewJSP extends HttpServlet {
         getServletContext().log( message, t );
     }
 }
+

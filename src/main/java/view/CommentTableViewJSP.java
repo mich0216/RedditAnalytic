@@ -1,6 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package view;
 
-import entity.Account;
+import entity.Comment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,17 +18,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logic.AccountLogic;
+import logic.CommentLogic;
 import logic.LogicFactory;
 
 /**
  *
- * @author Shariar (Shawn) Emami
+ * @author chris
  */
-@WebServlet( name = "AccountTableJSP", urlPatterns = { "/AccountTableJSP" } )
-public class AccountTableViewJSP extends HttpServlet {
-
-    private void fillTableData( HttpServletRequest req, HttpServletResponse resp )
+@WebServlet( name = "CommentTableJSP", urlPatterns = { "/CommentTableJSP" } )
+public class CommentTableViewJSP  extends HttpServlet {
+        private void fillTableData( HttpServletRequest req, HttpServletResponse resp )
             throws ServletException, IOException {
         String path = req.getServletPath();
         req.setAttribute( "entities", extractTableData( req ) );
@@ -35,10 +39,10 @@ public class AccountTableViewJSP extends HttpServlet {
 
     private List<?> extractTableData( HttpServletRequest req ) {
         String search = req.getParameter( "searchText" );
-        AccountLogic logic = LogicFactory.getFor( "Account" );
+        CommentLogic logic = LogicFactory.getFor( "Comment" );
         req.setAttribute( "columnName", logic.getColumnNames() );
         req.setAttribute( "columnCode", logic.getColumnCodes() );
-        List<Account> list;
+        List<Comment> list;
         if( search != null ){
             list = logic.search( search );
         } else {
@@ -79,8 +83,8 @@ public class AccountTableViewJSP extends HttpServlet {
     protected void doPost( HttpServletRequest req, HttpServletResponse resp )
             throws ServletException, IOException {
         log( "POST" );
-        AccountLogic logic = LogicFactory.getFor( "Account" );
-        Account account = logic.updateEntity( req.getParameterMap() );
+        CommentLogic logic = LogicFactory.getFor( "Comment" );
+        Comment account = logic.updateEntity( req.getParameterMap() );
         logic.update( account );
         fillTableData( req, resp );
     }
@@ -127,8 +131,8 @@ public class AccountTableViewJSP extends HttpServlet {
     protected void doDelete( HttpServletRequest req, HttpServletResponse resp )
             throws ServletException, IOException {
         log( "DELETE" );
-        AccountLogic logic = LogicFactory.getFor( "Account" );
-        Account account = logic.updateEntity( req.getParameterMap() );
+        CommentLogic logic = LogicFactory.getFor( "Comment" );
+        Comment account = logic.updateEntity( req.getParameterMap() );
         logic.delete(account );
         doPost( req, resp );
     }

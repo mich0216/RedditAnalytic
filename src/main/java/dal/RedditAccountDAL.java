@@ -20,9 +20,6 @@ public class RedditAccountDAL extends GenericDAL <RedditAccount> {
     public RedditAccountDAL() {
         super( RedditAccount.class );
     }
-    public RedditAccountDAL(Class<RedditAccount> entityClass) {
-        super(entityClass);
-    }
 
     @Override
     public List<RedditAccount> findAll() {
@@ -44,13 +41,13 @@ public class RedditAccountDAL extends GenericDAL <RedditAccount> {
     
     public List<RedditAccount> findByLinkPoints(int linkPoints){
         Map<String, Object> map = new HashMap<>();
-        map.put( "link_points", linkPoints );
+        map.put( "linkPoints", linkPoints );
         return findResults( "RedditAccount.findByLinkPoints", map );
     }
     
     public List<RedditAccount> findByCommentPoints(int commentPoints){
         Map<String, Object> map = new HashMap<>();
-        map.put( "comment_points", commentPoints );
+        map.put( "commentPoints", commentPoints );
         return findResults( "RedditAccount.findByCommentPoints", map );
     }
     
